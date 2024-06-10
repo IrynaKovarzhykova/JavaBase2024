@@ -53,6 +53,28 @@ public class Numbers {
         }
         System.out.println("Max element: " + max);
         System.out.println("Min element: " + min);
+
+        int firstNegativeIndex = -1;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < 0) {
+                firstNegativeIndex = i;
+                break;
+            }
+        }
+
+        if (firstNegativeIndex != -1 && firstNegativeIndex < array.length - 1) {
+            int sum = 0;
+            int count = 0;
+            for (int i = firstNegativeIndex + 1; i < array.length; i++) {
+                sum += array[i];
+                count++;
+            }
+            double average = (double) sum / count;
+            System.out.printf("Average of numbers after the first negative number: %.2f\n", average);
+        } else {
+            System.out.println("There are no numbers after the first negative number.");
+        }
     }
 }
+
 
