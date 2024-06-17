@@ -13,13 +13,13 @@ public class Matrix {
         fillMatrix(matrix);
         printMatrix(matrix);
 
-        int evenRowSum = sumEvenRows(matrix);
-        int oddRowSum = sumOddRows(matrix);
+        int evenRowSum = sumRows(matrix, 0);
+        int oddRowSum = sumRows(matrix, 1);
         System.out.println("Sum of elements in even rows: " + evenRowSum);
         System.out.println("Sum of elements in odd rows: " + oddRowSum);
 
-        int evenColProduct = productEvenCols(matrix);
-        int oddColProduct = productOddCols(matrix);
+        int evenColProduct = productColumns(matrix, 0);
+        int oddColProduct = productColumns(matrix, 1);
         System.out.println("Product of elements in even columns: " + evenColProduct);
         System.out.println("Product of elements in odd columns: " + oddColProduct);
 
@@ -49,9 +49,9 @@ public class Matrix {
         }
     }
 
-    private static int sumEvenRows(int[][] matrix) {
+    private static int sumRows(int[][] matrix, int initial) {
         int sum = 0;
-        for (int i = 0; i < matrix.length; i += 2) {
+        for (int i = initial; i < matrix.length; i += 2) {
             for (int j = 0; j < matrix[i].length; j++) {
                 sum += matrix[i][j];
             }
@@ -59,29 +59,9 @@ public class Matrix {
         return sum;
     }
 
-    private static int sumOddRows(int[][] matrix) {
-        int sum = 0;
-        for (int i = 1; i < matrix.length; i += 2) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                sum += matrix[i][j];
-            }
-        }
-        return sum;
-    }
-
-    private static int productEvenCols(int[][] matrix) {
+    private static int productColumns(int[][] matrix, int initial) {
         int product = 1;
-        for (int j = 0; j < matrix[0].length; j += 2) {
-            for (int i = 0; i < matrix.length; i++) {
-                product *= matrix[i][j];
-            }
-        }
-        return product;
-    }
-
-    private static int productOddCols(int[][] matrix) {
-        int product = 1;
-        for (int j = 1; j < matrix[0].length; j += 2) {
+        for (int j = initial; j < matrix[0].length; j += 2) {
             for (int i = 0; i < matrix.length; i++) {
                 product *= matrix[i][j];
             }
@@ -107,24 +87,24 @@ public class Matrix {
         }
 
         for (int j = 0; j < size; j++) {
-            int colSum = 0;
+            int columnSum = 0;
             for (int i = 0; i < size; i++) {
-                colSum += matrix[i][j];
+                columnSum += matrix[i][j];
             }
-            if (colSum != magicSum) {
+            if (columnSum != magicSum) {
                 return false;
             }
         }
 
 
-        int diag1Sum = 0;
-        int diag2Sum = 0;
+        int mainDiagonalSum = 0;
+        int secondaryDiagonalSum = 0;
         for (int i = 0; i < size; i++) {
-            diag1Sum += matrix[i][i];
-            diag2Sum += matrix[i][size - 1 - i];
+            mainDiagonalSum += matrix[i][i];
+            secondaryDiagonalSum += matrix[i][size - 1 - i];
         }
 
-        return diag1Sum == magicSum && diag2Sum == magicSum;
+        return mainDiagonalSum == magicSum && secondaryDiagonalSum == magicSum;
     }
 }
 
