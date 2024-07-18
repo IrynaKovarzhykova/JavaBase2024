@@ -1,0 +1,9 @@
+
+<dependency>
+
+
+    <groupId>Calculator</groupId>
+    <javabase20241>homework16.SimpleCalculator</javabase20241>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+        </dependencies>
